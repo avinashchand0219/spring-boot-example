@@ -33,5 +33,11 @@ public class DepartmentController {
 		
 		return departmentService.findDepartmentbyId(id);
 	}
+	
+	@GetMapping("/welcome")
+	public Department findDemaprtmentById(@PathVariable("name") String name) {
+		
+		return "Hello" +name+"! Thanks for visiting the page!!";
+	}
 
 }
