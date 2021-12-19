@@ -35,7 +35,7 @@ public class DepartmentController {
 	}
 	
 	@GetMapping("/welcome")
-	public Department findDemaprtmentById(@PathVariable("name") String name) {
+	public String findDemaprtmentById(@PathVariable("name") String name) {
 		
 		return "Hello " +name+"! Thanks for visiting the page!!";
 	}
