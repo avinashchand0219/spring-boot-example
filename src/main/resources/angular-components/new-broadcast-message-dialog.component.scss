@@ -1,3 +1,49 @@
+// AGGRESSIVE TAB FIXES - Use ::ng-deep to pierce ViewEncapsulation
+::ng-deep {
+  // Force narrow tab headers - 1/9 width each
+  .mat-mdc-tab-group .mat-mdc-tab-header .mat-mdc-tab-label-container .mat-mdc-tab-list .mat-mdc-tab,
+  .mat-mdc-tab-header .mat-mdc-tab,
+  .mat-mdc-tab {
+    width: calc(100vw / 9) !important;
+    max-width: calc(100vw / 9) !important;
+    min-width: calc(100vw / 9) !important;
+    flex: 0 0 calc(100vw / 9) !important;
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
+    flex-basis: calc(100vw / 9) !important;
+  }
+  
+  // Force indicator to TOP position
+  .mat-mdc-tab .mdc-tab-indicator,
+  .mat-mdc-tab .mdc-tab-indicator__content,
+  .mat-mdc-tab .mdc-tab-indicator__content--underline,
+  .mdc-tab-indicator,
+  .mdc-tab-indicator__content,
+  .mdc-tab-indicator__content--underline {
+    top: 0 !important;
+    bottom: auto !important;
+    height: 3px !important;
+    transform: translateY(0) !important;
+  }
+  
+  // Fallback for older Angular Material
+  .mat-ink-bar {
+    top: 0 !important;
+    bottom: auto !important;
+    height: 3px !important;
+  }
+  
+  // Ensure tab labels are centered in narrow tabs
+  .mat-mdc-tab-label,
+  .mat-tab-label {
+    width: 100% !important;
+    text-align: center !important;
+    justify-content: center !important;
+    padding: 0 4px !important;
+    font-size: 0.875rem !important;
+  }
+}
+
 // Fix for Angular Material v19 form field sizing issues
 .additional-selection {
   opacity: 0.75;
@@ -348,4 +394,51 @@ mat-dialog-content {
 .mat-mdc-tab-body-content {
   width: 100% !important;
   max-width: 100% !important;
+}
+
+// FINAL AGGRESSIVE OVERRIDES - These should be at the end to have highest priority
+::ng-deep .mat-mdc-tab-group {
+  .mat-mdc-tab-header {
+    .mat-mdc-tab-label-container {
+      .mat-mdc-tab-list {
+        .mat-mdc-tab {
+          // FORCE narrow width with maximum specificity
+          width: calc(100vw / 9) !important;
+          max-width: calc(100vw / 9) !important;
+          min-width: calc(100vw / 9) !important;
+          flex: 0 0 calc(100vw / 9) !important;
+          
+          // FORCE indicator to top
+          .mdc-tab-indicator {
+            top: 0 !important;
+            bottom: auto !important;
+            height: 3px !important;
+            position: absolute !important;
+          }
+          
+          .mdc-tab-indicator__content {
+            top: 0 !important;
+            bottom: auto !important;
+            height: 3px !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Alternative approach using attribute selectors for maximum override
+::ng-deep [role="tab"] {
+  width: calc(100vw / 9) !important;
+  max-width: calc(100vw / 9) !important;
+  min-width: calc(100vw / 9) !important;
+  flex: 0 0 calc(100vw / 9) !important;
+}
+
+// Force indicator positioning with attribute selectors
+::ng-deep [role="tab"] .mdc-tab-indicator,
+::ng-deep [role="tab"] .mdc-tab-indicator__content {
+  top: 0 !important;
+  bottom: auto !important;
+  height: 3px !important;
 }
