@@ -79,11 +79,11 @@
   overflow-x: hidden;
   width: 100%;
   
-  // Make tabs narrow - each tab 1/9 of total page width
+  // Tab headers narrow, but content full width
   .mat-mdc-tab-group {
     width: 100%;
     
-    // Fix for tab header to be narrow
+    // Fix for tab header - only the clickable tab area is narrow
     .mat-mdc-tab-header {
       width: 100%;
       
@@ -92,32 +92,34 @@
       }
       
       .mat-mdc-tab-label-container {
-        width: auto; // Don't force full width
-        flex: none; // Don't grow
+        width: 100%; // Container takes full width
         
         .mat-mdc-tab-list {
-          width: auto; // Auto width for narrow tabs
+          width: 100%; // List takes full width
           display: flex;
           justify-content: flex-start; // Align tabs to left
           
           .mat-mdc-tab {
-            flex: none; // Don't grow to fill space
-            width: calc(100vw / 9); // Each tab is 1/9 of viewport width
+            // Only the tab button itself is narrow (1/9 width)
+            flex: none;
+            width: calc(100vw / 9); // Each tab header is 1/9 of viewport width
             max-width: calc(100vw / 9);
             min-width: calc(100vw / 9);
             
             .mat-mdc-tab-label {
               width: 100%;
               justify-content: center;
-              padding: 0 8px; // Reduced padding for narrow tabs
+              padding: 0 4px; // Minimal padding for narrow tab headers
               min-width: 0;
-              font-size: 0.875rem; // Slightly smaller font
+              font-size: 0.875rem; // Smaller font for narrow headers
+              text-align: center;
             }
           }
         }
       }
     }
     
+    // Content area remains full width
     .mat-mdc-tab-body-wrapper {
       width: 100%;
     }
@@ -198,34 +200,34 @@
   width: 100%;
 }
 
-// Additional tab fixes for Angular Material v19 - narrow tabs
+// Additional tab fixes for Angular Material v19 - narrow tab headers only
 .mat-mdc-tab-group {
-  // Override any default full-width behavior
+  // Ensure proper structure: full-width container, narrow tab buttons
   .mat-mdc-tab-header {
     .mat-mdc-tab-label-container {
-      // Don't force full width for narrow tabs
-      flex: none;
-      width: auto;
+      // Container takes full width to hold narrow tabs
+      flex: 1;
+      width: 100%;
       
       .mat-mdc-tab-list {
-        // Keep tabs narrow and left-aligned
+        // List takes full width but tabs inside are narrow
         justify-content: flex-start;
-        width: auto;
+        width: 100%;
         
         .mat-mdc-tab {
-          // Fixed narrow width - 1/9 of viewport
+          // Only the clickable tab header is narrow - 1/9 of viewport
           flex: none;
           width: calc(100vw / 9);
           max-width: calc(100vw / 9);
           min-width: calc(100vw / 9);
           
-          // Center the tab text within narrow tab
+          // Center the tab text within narrow tab header
           .mat-mdc-tab-label {
             text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0 4px; // Minimal padding for narrow tabs
+            padding: 0 4px; // Minimal padding for narrow tab headers
             font-size: 0.875rem;
           }
         }
@@ -234,7 +236,7 @@
   }
 }
 
-// Fallback for older Angular Material versions - narrow tabs
+// Fallback for older Angular Material versions - narrow tab headers only
 .mat-tab-group {
   width: 100%;
   
@@ -242,15 +244,16 @@
     width: 100%;
     
     .mat-tab-label-container {
-      width: auto; // Don't force full width
-      flex: none;
+      width: 100%; // Container full width
+      flex: 1;
       
       .mat-tab-list {
-        width: auto; // Auto width for narrow tabs
+        width: 100%; // List full width
         display: flex;
         justify-content: flex-start;
         
         .mat-tab-label {
+          // Only the tab label/button is narrow
           flex: none;
           width: calc(100vw / 9); // 1/9 of viewport width
           max-width: calc(100vw / 9);
