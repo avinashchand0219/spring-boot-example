@@ -79,11 +79,11 @@
   overflow-x: hidden;
   width: 100%;
   
-  // Ensure tabs content doesn't overflow and takes full width
+  // Make tabs narrow - each tab 1/9 of total page width
   .mat-mdc-tab-group {
     width: 100%;
     
-    // Fix for tab header to take full width
+    // Fix for tab header to be narrow
     .mat-mdc-tab-header {
       width: 100%;
       
@@ -92,22 +92,26 @@
       }
       
       .mat-mdc-tab-label-container {
-        width: 100%;
+        width: auto; // Don't force full width
+        flex: none; // Don't grow
         
         .mat-mdc-tab-list {
-          width: 100%;
+          width: auto; // Auto width for narrow tabs
           display: flex;
+          justify-content: flex-start; // Align tabs to left
           
           .mat-mdc-tab {
-            flex: 1; // Each tab takes equal width
-            max-width: none;
-            min-width: 0;
+            flex: none; // Don't grow to fill space
+            width: calc(100vw / 9); // Each tab is 1/9 of viewport width
+            max-width: calc(100vw / 9);
+            min-width: calc(100vw / 9);
             
             .mat-mdc-tab-label {
               width: 100%;
               justify-content: center;
-              padding: 0 24px;
+              padding: 0 8px; // Reduced padding for narrow tabs
               min-width: 0;
+              font-size: 0.875rem; // Slightly smaller font
             }
           }
         }
@@ -194,29 +198,35 @@
   width: 100%;
 }
 
-// Additional tab fixes for Angular Material v19
+// Additional tab fixes for Angular Material v19 - narrow tabs
 .mat-mdc-tab-group {
-  // Ensure tab group takes full available width
+  // Override any default full-width behavior
   .mat-mdc-tab-header {
     .mat-mdc-tab-label-container {
-      // Force full width for tab container
-      flex: 1;
+      // Don't force full width for narrow tabs
+      flex: none;
+      width: auto;
       
       .mat-mdc-tab-list {
-        // Ensure tabs distribute evenly
-        justify-content: stretch;
+        // Keep tabs narrow and left-aligned
+        justify-content: flex-start;
+        width: auto;
         
         .mat-mdc-tab {
-          // Force equal distribution
-          flex-grow: 1;
-          flex-basis: 0;
+          // Fixed narrow width - 1/9 of viewport
+          flex: none;
+          width: calc(100vw / 9);
+          max-width: calc(100vw / 9);
+          min-width: calc(100vw / 9);
           
-          // Center the tab text
+          // Center the tab text within narrow tab
           .mat-mdc-tab-label {
             text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 0 4px; // Minimal padding for narrow tabs
+            font-size: 0.875rem;
           }
         }
       }
@@ -224,7 +234,7 @@
   }
 }
 
-// Fallback for older Angular Material versions
+// Fallback for older Angular Material versions - narrow tabs
 .mat-tab-group {
   width: 100%;
   
@@ -232,17 +242,22 @@
     width: 100%;
     
     .mat-tab-label-container {
-      width: 100%;
+      width: auto; // Don't force full width
+      flex: none;
       
       .mat-tab-list {
-        width: 100%;
+        width: auto; // Auto width for narrow tabs
         display: flex;
+        justify-content: flex-start;
         
         .mat-tab-label {
-          flex: 1;
-          max-width: none;
-          min-width: 0;
+          flex: none;
+          width: calc(100vw / 9); // 1/9 of viewport width
+          max-width: calc(100vw / 9);
+          min-width: calc(100vw / 9);
           justify-content: center;
+          padding: 0 4px;
+          font-size: 0.875rem;
         }
       }
     }
