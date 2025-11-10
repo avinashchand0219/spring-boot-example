@@ -1,0 +1,275 @@
+<div class="app-flex-row app-modal-header">
+  <div class="col-md-11">
+    <h1 mat-dialog-title id="nbm_modal_title">{{messageTitle}}</h1>
+  </div>
+  <div class="col-md-1 text-end">
+    <button id="nbm_modal-close-icon" class="btn btn-link" (click)="dialogRef.close()">
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </button>
+  </div>
+</div>
+
+<mat-dialog-content class="app-modal-content" id="modal-content">
+  <div class="app-flex-row">
+    <div class="col-md-12">
+      <mat-tab-group (selectedTabChange)="handlePreviewSelected($event)">
+        <mat-tab label="Message Details" class="app-modifier">
+          <form #form="ngForm">
+            <div class="app-flex-row">
+              <div class="col-md-8">
+                <p class="small" id="prf_required_fields">Required fields are indicated by an asterisk (*)</p>
+              </div>
+              <div class="col-md-4 text-end">
+                <button id="nbm_btn_reset" mat-stroked-button color="primary" type="button" 
+                        (click)="handleReset(bcGroupRef, priorityLevelRef)">
+                  <i aria-hidden="true" class="fa fa-undo"></i>
+                  <span id="nbm_btn_reset_lbl">Reset</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="app-flex-row">
+              <div class="col-md-2">
+                <div matTooltip="The date entered must be in the format of mm/dd/yyyy." matTooltipPosition="below">
+                  <mat-form-field floatLabel="always" class="app-modifier" appearance="fill">
+                    <mat-label id="di_report_firstDate_fl_lbl">First Date</mat-label>
+                    <input id="di_report_firstDate" matInput [min]="minFirstDate"
+                           [matDatepicker]="pickerS" placeholder="Enter date" required
+                           #firstDateRef="ngModel" [(ngModel)]="firstDate" name="firstDate"
+                           (dateChange)="handleFirstDateChanged(firstDateRef)">
+                    <mat-datepicker-toggle id="prf_sdPicker" matSuffix [for]="pickerS" tabindex="-1"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerS></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <mat-error id="di_report_firstDate_err" *ngIf="!firstDateRef.valid && firstDateRef.touched">
+                  Please enter valid date
+                </mat-error>
+              </div>
+
+              <div class="col-md-2">
+                <div matTooltip="The date entered must be in the format of mm/dd/yyyy." matTooltipPosition="below">
+                  <mat-form-field floatLabel="always" class="app-modifier" appearance="fill">
+                    <mat-label id="di_lastDate_fl_lbl">Last Date</mat-label>
+                    <input id="di_lastDate" matInput [min]="minLastDate" [max]="maxLastDate"
+                           [matDatepicker]="pickerE" placeholder="Enter date" required
+                           #lastDateRef="ngModel" [(ngModel)]="lastDate" name="lastDate"
+                           (dateChange)="handleLastDateChanged(lastDateRef)">
+                    <mat-datepicker-toggle id="prf_edPicker" matSuffix [for]="pickerE"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerE></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <mat-error id="di_lastDate_err" *ngIf="!lastDateRef.valid && lastDateRef.touched">
+                  Please enter valid date
+                </mat-error>
+              </div>
+
+              <div class="col-md-4">
+                <mat-form-field floatLabel="always" class="mat-form-field-no-margin" appearance="fill">
+                  <mat-label id="prf_nbm_st_fl_lbl">Site Type</mat-label>
+                  <mat-select id="prf_nbm_st" placeholder="Select Site Type"
+                              disableOptionCentering
+                              #stRef [formControl]="selectedST"
+                              (selectionChange)="handleSTChanged()">
+                    <mat-option *ngFor="let st of allowedSiteTypes; let i=index" [value]="st">
+                      <span id="prf_nbm_st_{{i}}"> {{ st }} </span>
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-error id="prf_st_err" *ngIf="!stRef.valid && stRef.touched">
+                  Please select a Site Type
+                </mat-error>
+              </div>
+
+              <div class="col-md-2" [style.visibility]="isSystemBCEnabled ? 'visible' : 'hidden'">
+                <label id="prf_bl_label" class="app-modifier">Broadcast Level</label>
+                <mat-button-toggle-group [(ngModel)]="selectedBCLevel" #bcGroupRef="ngModel" 
+                                         name="selectedBCLevel" id="prf_bl" (change)="handleBCLevelChanged()">
+                  <mat-button-toggle id="prf_bl_system" value="System">System</mat-button-toggle>
+                  <mat-button-toggle id="prf_bl_office" value="Office">Office</mat-button-toggle>
+                </mat-button-toggle-group>
+              </div>
+
+              <div class="col-md-2">
+                <label class="app-modifier">
+                  <span id="prf_pl_label">Priority Level</span> 
+                  <i class="fa fa-info-circle" matTooltip="1 Highest to 5 Lowest" matTooltipPosition="above"></i>
+                </label>
+                <mat-button-toggle-group [(ngModel)]="priorityLevel" #priorityLevelRef="ngModel" 
+                                         name="priorityLevel" id="prf_nbm_priority">
+                  <mat-button-toggle id="prf_nbm_priority1" value="1">1</mat-button-toggle>
+                  <mat-button-toggle id="prf_nbm_priority2" value="2">2</mat-button-toggle>
+                  <mat-button-toggle id="prf_nbm_priority3" value="3">3</mat-button-toggle>
+                  <mat-button-toggle id="prf_nbm_priority4" value="4">4</mat-button-toggle>
+                  <mat-button-toggle id="prf_nbm_priority5" value="5">5</mat-button-toggle>
+                </mat-button-toggle-group>
+              </div>
+            </div>
+
+            <div class="app-flex-row">
+              <div class="col-md-8">
+                <mat-form-field floatLabel="always" appearance="fill">
+                  <mat-label id="id_msgTitle_fl_lbl">Title</mat-label>
+                  <input matInput placeholder="Enter message title"
+                         [(ngModel)]="msgTitle"
+                         name="msgTitle"
+                         id="id_msgTitle"
+                         #msgTitleRef="ngModel"
+                         maxlength="200"
+                         *appPrintableInput="msgTitle">
+                  <mat-hint id="id_msgTitle_hint" align="end">Character Limit ({{msgTitle.length}}/200)</mat-hint>
+                  <mat-error id="id_msgTitle_invalidErr" *ngIf="msgTitleRef?.errors && msgTitleRef?.errors.invalidValue">
+                    Please enter valid characters only
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-4">
+                <mat-form-field floatLabel="always" class="mat-form-field-no-margin" appearance="fill">
+                  <mat-label id="id_selectedOffices_fl_lbl">Office</mat-label>
+                  <mat-select
+                    [disabled]="isOfficeSelectDisabled"
+                    #selectedOfficeRef [formControl]="selectedOffices"
+                    (selectionChange)="handleOfficeSelectChanged()"
+                    [errorStateMatcher]="selMatcher"
+                    disableOptionCentering
+                    id="id_selectedOffices"
+                    placeholder="Select Office" 
+                    [required]="!isOfficeSelectDisabled" 
+                    multiple>
+                    <mat-select-trigger>
+                      {{officeSelectText}}&nbsp;&nbsp;
+                      <span class="additional-selection">{{officeSelectAddText}}</span>
+                    </mat-select-trigger>
+                    <mat-checkbox *ngIf="initParam && initParam.officeList && initParam.officeList.length > 1"
+                                  class="mat-option"
+                                  [disableRipple]="true"
+                                  [indeterminate]="isIndeterminate()"
+                                  [checked]="isChecked()"
+                                  (click)="$event.stopPropagation()"
+                                  (change)="toggleSelection($event)">
+                      Select All
+                    </mat-checkbox>
+                    <mat-option *ngFor="let office of initParam?.officeList; let i=index" [value]="office">
+                      <span id="id_selectedOffices_{{i}}">{{office}}</span>
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-error id="id_selectedOffices_err" *ngIf="selectedOfficeRef.errorState && selectedOffices.hasError('required')">
+                  Please select Office(s)
+                </mat-error>
+              </div>
+            </div>
+
+            <div class="app-flex-row">
+              <div class="col-md-12">
+                <mat-form-field floatLabel="always" appearance="fill">
+                  <mat-label id="id_message1_fl_lbl">Message Text 1</mat-label>
+                  <textarea matInput placeholder="Enter message"
+                            [(ngModel)]="message1"
+                            name="message1"
+                            id="id_message1"
+                            #message1Ref="ngModel"
+                            maxlength="500"
+                            rows="4"></textarea>
+                  <mat-hint id="id_msg1_hint" align="end">Character Limit ({{message1.length}}/500)</mat-hint>
+                  <mat-error id="id_message1_invalidErr" *ngIf="message1Ref.errors && message1Ref.errors.invalidValue">
+                    Please enter valid characters only
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="app-flex-row">
+              <div class="col-md-6">
+                <mat-form-field floatLabel="always" appearance="fill">
+                  <mat-label id="id_urlName_fl_lbl">Anchor Text</mat-label>
+                  <input matInput placeholder="Enter hyperlink name"
+                         [(ngModel)]="urlName"
+                         name="urlName"
+                         id="id_urlName"
+                         #urlNameRef="ngModel"
+                         maxlength="100"
+                         (blur)="handleUrlOrNameBlur()"
+                         *appPrintableInput="urlName">
+                  <mat-hint id="id_anchortext_hint" align="end">Character Limit ({{urlName.length}}/100)</mat-hint>
+                  <mat-error id="id_urlName_invalidErr" *ngIf="urlNameRef?.errors && urlNameRef?.errors.invalidValue">
+                    Please enter valid characters only
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-6">
+                <mat-form-field floatLabel="always" appearance="fill">
+                  <mat-label id="id_url_fl_lbl">Link URL</mat-label>
+                  <input matInput placeholder="Enter URL"
+                         [(ngModel)]="url"
+                         name="url"
+                         id="id_url"
+                         type="url"
+                         #urlRef="ngModel"
+                         [required]="isURLRequired"
+                         maxlength="100"
+                         (blur)="handleUrlOrNameBlur()"
+                         *appPrintableInput="url"/>
+                  <mat-hint id="id_url_hint" align="end">Character Limit ({{url.length}}/100)</mat-hint>
+                  <mat-error id="id_url_invalidErr" *ngIf="(!urlRef?.valid && urlRef?.touched) || (urlRef?.errors && urlRef?.errors.invalidValue)">
+                    Please enter valid URL in http(s):// format without special characters: ?, &gt;, &lt;, %, !, &#123;, &#125;, [, ], ^, ;, +, &quot;
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="app-flex-row">
+              <div class="col-md-12">
+                <mat-form-field floatLabel="always" appearance="fill">
+                  <mat-label id="id_message2_fl_lbl">Message Text 2</mat-label>
+                  <textarea matInput placeholder="Enter message"
+                            [(ngModel)]="message2"
+                            name="message2"
+                            id="id_message2"
+                            #message2Ref="ngModel"
+                            maxlength="500"
+                            rows="4"></textarea>
+                  <mat-hint id="id_msg2_hint" align="end">Character Limit ({{message2.length}}/500)</mat-hint>
+                  <mat-error id="id_message2_invalidErr" *ngIf="message2Ref.errors && message2Ref.errors.invalidValue">
+                    Please enter valid characters only
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </form>
+        </mat-tab>
+
+        <mat-tab label="Preview Message" class="app-modifier">
+          <div class="app-flex-row">
+            <div class="col-md-12">
+              <span id="id_previewMsg" [innerHTML]="previewMsg"></span>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions class="app-modal-actions" style="padding: 8px 16px 8px 16px;">
+  <table width="100%">
+    <tr>
+      <td align="left" width="80%">
+        <span *ngIf="isPreviewSelected" class="small">
+          <em id="id_disclaimer">Message formatting e.g., colors, fonts, sizing may look differently after publishing.</em>
+        </span>
+      </td>
+      <td align="right" width="20%"></td>
+      <td>
+        <span class="col-auto">
+          <button mat-raised-button color="primary" type="button" id="modal_save" 
+                  [disabled]="isSaveDisabled || form.invalid" 
+                  (click)="handleSave()">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>Save
+          </button>
+        </span>
+      </td>
+    </tr>
+  </table>
+</mat-dialog-actions>

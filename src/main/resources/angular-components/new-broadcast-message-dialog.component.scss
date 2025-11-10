@@ -1,0 +1,163 @@
+// Fix for Angular Material v19 form field sizing issues
+.additional-selection {
+  opacity: 0.75;
+  font-size: 0.75em;
+}
+
+.mat-form-field-no-margin {
+  margin-top: 0px;
+}
+
+// Angular Material v19 compatibility fixes
+.mat-mdc-form-field {
+  width: 100%;
+  
+  // Ensure proper sizing for all form fields
+  &.mat-form-field-appearance-fill {
+    width: 100%;
+  }
+  
+  // Fix for input field width
+  .mat-mdc-text-field-wrapper {
+    width: 100%;
+  }
+  
+  // Fix for select field width
+  .mat-mdc-select {
+    width: 100%;
+  }
+  
+  // Fix for textarea width
+  .mat-mdc-input-element {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+// Ensure Bootstrap grid columns work properly with Angular Material
+.app-flex-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -15px;
+  
+  [class*="col-"] {
+    padding: 0 15px;
+    
+    // Ensure form fields take full width of their container
+    .mat-mdc-form-field {
+      width: 100%;
+      min-width: 0; // Prevent flex items from overflowing
+    }
+  }
+}
+
+// Fix for date picker fields that might be too narrow
+.col-md-2 {
+  .mat-mdc-form-field {
+    min-width: 150px; // Ensure date fields have minimum width
+  }
+}
+
+// Fix for button toggle groups
+.mat-button-toggle-group {
+  display: flex;
+  flex-wrap: wrap;
+  
+  .mat-button-toggle {
+    flex: 1;
+    min-width: auto;
+  }
+}
+
+// Fix for select dropdown width
+.mat-mdc-select-panel {
+  min-width: 100%;
+}
+
+// Fix for modal content to prevent overflow
+.app-modal-content {
+  overflow-x: hidden;
+  
+  // Ensure tabs content doesn't overflow
+  .mat-mdc-tab-group {
+    width: 100%;
+    
+    .mat-mdc-tab-body-wrapper {
+      width: 100%;
+    }
+    
+    .mat-mdc-tab-body-content {
+      width: 100%;
+      overflow-x: hidden;
+    }
+  }
+}
+
+// Fix for form field labels and hints
+.mat-mdc-form-field-subscript-wrapper {
+  width: 100%;
+}
+
+// Responsive fixes for smaller screens
+@media (max-width: 768px) {
+  .app-flex-row {
+    [class*="col-md-"] {
+      flex: 0 0 100%;
+      max-width: 100%;
+      margin-bottom: 16px;
+    }
+  }
+  
+  // Stack button toggles vertically on small screens
+  .mat-button-toggle-group {
+    flex-direction: column;
+    
+    .mat-button-toggle {
+      width: 100%;
+    }
+  }
+}
+
+// Fix for dialog actions
+.app-modal-actions {
+  width: 100%;
+  
+  table {
+    width: 100%;
+    table-layout: fixed;
+    
+    td {
+      vertical-align: middle;
+    }
+  }
+}
+
+// Additional fixes for Angular Material v19 specific issues
+.mat-mdc-form-field-flex {
+  width: 100%;
+}
+
+.mat-mdc-form-field-infix {
+  width: 100%;
+  min-width: 0;
+}
+
+// Fix for checkbox in select dropdown
+.mat-mdc-option .mat-mdc-checkbox {
+  margin-right: 8px;
+}
+
+// Ensure proper spacing between form rows
+.app-flex-row + .app-flex-row {
+  margin-top: 16px;
+}
+
+// Fix for mat-hint alignment
+.mat-mdc-form-field-hint-wrapper {
+  width: 100%;
+}
+
+// Fix for error messages
+.mat-mdc-form-field-error-wrapper {
+  width: 100%;
+}
