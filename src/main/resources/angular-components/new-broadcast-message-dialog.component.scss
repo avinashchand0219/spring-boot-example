@@ -54,6 +54,11 @@
   margin-top: 0px;
 }
 
+// Add tab width spacing between form rows
+form .app-flex-row + .app-flex-row {
+  margin-top: 2rem;
+}
+
 // Angular Material v19 compatibility fixes
 .mat-mdc-form-field {
   width: 100%;
