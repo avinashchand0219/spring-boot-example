@@ -1,0 +1,22 @@
+@media print {
+  .transOutDialRow {
+    display: table-row !important;
+    width: 100% !important;
+  }
+  
+  .transOutDialLabel,
+  .transOutDialData {
+    display: table-cell !important;
+    white-space: nowrap !important;
+    padding: 2px 8px !important;
+    vertical-align: top !important;
+  }
+  
+  .transOutDialLabel {
+    width: 40% !important;
+  }
+  
+  .transOutDialData {
+    width: 60% !important;
+  }
+}
