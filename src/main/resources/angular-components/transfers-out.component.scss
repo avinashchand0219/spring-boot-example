@@ -111,4 +111,70 @@
     padding: 2px 0 !important;
     margin: 0 !important;
   }
+  
+  // Restore proper table formatting for Material Design tables
+  .mat-mdc-table,
+  .mat-table,
+  table[mat-table] {
+    border-collapse: collapse !important;
+    width: 100% !important;
+    border: 1px solid #ddd !important;
+  }
+  
+  // Table header styling
+  .mat-mdc-header-row,
+  .mat-header-row,
+  tr[mat-header-row] {
+    background-color: #f5f5f5 !important;
+    border-bottom: 2px solid #ddd !important;
+  }
+  
+  // Table header cells
+  .mat-mdc-header-cell,
+  .mat-header-cell,
+  th[mat-header-cell] {
+    background-color: #f5f5f5 !important;
+    border: 1px solid #ddd !important;
+    padding: 8px !important;
+    font-weight: bold !important;
+    color: black !important;
+    text-align: left !important;
+  }
+  
+  // Table data rows
+  .mat-mdc-row,
+  .mat-row,
+  tr[mat-row] {
+    border-bottom: 1px solid #ddd !important;
+    background-color: white !important;
+  }
+  
+  // Table data cells
+  .mat-mdc-cell,
+  .mat-cell,
+  td[mat-cell] {
+    border: 1px solid #ddd !important;
+    padding: 8px !important;
+    color: black !important;
+    vertical-align: top !important;
+  }
+  
+  // Ensure table content is visible
+  .mat-mdc-table *,
+  .mat-table * {
+    color: black !important;
+    background: transparent !important;
+  }
+  
+  // Override any hiding rules for table content
+  .mat-mdc-table .mat-mdc-cell,
+  .mat-mdc-table .mat-mdc-header-cell,
+  .mat-table .mat-cell,
+  .mat-table .mat-header-cell {
+    display: table-cell !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: auto !important;
+    height: auto !important;
+  }
 }
