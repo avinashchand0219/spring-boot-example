@@ -47,12 +47,30 @@
     appearance: none !important;
   }
   
-  // Remove dropdown arrows and icons
+  // Remove dropdown arrows and icons - comprehensive selectors
   .mat-select-arrow,
   .mat-select-arrow-wrapper,
   .mat-form-field-suffix,
   .mat-datepicker-toggle,
-  .mat-icon {
+  .mat-icon,
+  .mat-select-trigger::after,
+  .mat-form-field-suffix .mat-icon,
+  .mat-form-field-suffix .fa,
+  .mat-form-field-suffix i,
+  [class*="arrow"],
+  [class*="dropdown"],
+  .cdk-overlay-backdrop,
+  .mat-select-panel {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+  }
+  
+  // Additional arrow removal using pseudo-elements
+  .mat-select::after,
+  .mat-select-trigger::after,
+  select::after {
+    content: none !important;
     display: none !important;
   }
   
