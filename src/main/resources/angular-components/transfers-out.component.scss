@@ -1,17 +1,24 @@
 @media print {
-  // Remove box styling for print
-  .mat-card,
-  .card,
-  .border {
+  // Remove all box styling for print
+  * {
     border: none !important;
     box-shadow: none !important;
     background: transparent !important;
+    outline: none !important;
   }
   
-  // Move text 3 spaces to the right
+  // Move all content 3 spaces to the right
+  body,
+  .container,
+  .mat-card,
+  .card,
   .content,
   .mat-card-content,
-  .card-body {
+  .card-body,
+  div,
+  p,
+  h1, h2, h3, h4, h5, h6 {
     margin-left: 3em !important;
+    padding-left: 0 !important;
   }
 }
