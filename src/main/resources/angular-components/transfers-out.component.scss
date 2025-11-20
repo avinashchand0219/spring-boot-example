@@ -48,16 +48,20 @@
     appearance: none !important;
   }
   
-  // Aggressive approach - hide ALL possible dropdown arrows and icons
-  *::before,
-  *::after {
-    content: none !important;
+  // Target specific Material Design select arrow elements
+  .mat-mdc-select-arrow-wrapper,
+  .mat-mdc-select-arrow,
+  .mat-mdc-select-arrow svg,
+  .mat-select-arrow,
+  .mat-select-arrow-wrapper {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
   }
   
-  // Hide all icons, arrows, and interactive elements
-  .mat-select-arrow,
-  .mat-select-arrow-wrapper,
+  // Hide all other icons and interactive elements
   .mat-form-field-suffix,
   .mat-datepicker-toggle,
   .mat-icon,
@@ -71,13 +75,19 @@
   .cdk-overlay-backdrop,
   .mat-select-panel,
   .mat-option,
-  .mat-select-trigger,
   button {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
     width: 0 !important;
     height: 0 !important;
+  }
+  
+  // Remove pseudo-elements that might create arrows
+  *::before,
+  *::after {
+    content: none !important;
+    display: none !important;
   }
   
   // Style labels to appear as plain text
