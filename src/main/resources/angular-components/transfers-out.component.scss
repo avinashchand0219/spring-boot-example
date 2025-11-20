@@ -1,8 +1,10 @@
 @media print {
-  // Remove only the unwanted box around content
-  .mat-card,
-  .card {
+  // Remove box from alert but keep the teal background and text styling
+  .alert,
+  .alert-info {
     border: none !important;
     box-shadow: none !important;
+    background: teal !important;
+    color: white !important;
   }
 }
