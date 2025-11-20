@@ -1,40 +1,8 @@
 @media print {
-  // Remove box styling but preserve teal background text
+  // Remove only the unwanted box around content
   .mat-card,
-  .card,
-  .border,
-  .container,
-  .wrapper {
+  .card {
     border: none !important;
     box-shadow: none !important;
-    background: transparent !important;
-    outline: none !important;
-  }
-  
-  // Preserve teal background for "No pending Transfers Out" text
-  .bg-info,
-  .alert-info,
-  .text-info,
-  [style*="teal"],
-  [style*="background-color"] {
-    background: teal !important;
-    color: white !important;
-    padding: 8px 12px !important;
-    display: inline-block !important;
-  }
-  
-  // Move all content 3 spaces to the right
-  body,
-  .container,
-  .mat-card,
-  .card,
-  .content,
-  .mat-card-content,
-  .card-body,
-  div,
-  p,
-  h1, h2, h3, h4, h5, h6 {
-    margin-left: 3em !important;
-    padding-left: 0 !important;
   }
 }
