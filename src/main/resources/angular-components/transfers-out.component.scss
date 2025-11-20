@@ -1,4 +1,9 @@
 @media print {
+  // Override Material Design elevation shadow
+  * {
+    --mdc-elevated-card-container-elevation: none !important;
+  }
+  
   // Remove box from alert but keep the teal background and text styling
   .alert,
   .alert-info {
