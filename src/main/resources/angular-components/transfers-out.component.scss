@@ -4,42 +4,77 @@
     --mdc-elevated-card-container-elevation: none !important;
   }
   
-  // Remove box styling but preserve teal background text
-  .mat-card,
-  .card,
-  .border,
-  .container,
-  .wrapper {
+  // Remove box from alert but keep the teal background and text styling
+  .alert,
+  .alert-info {
     border: none !important;
     box-shadow: none !important;
+    background: teal !important;
+    color: white !important;
+  }
+  
+  // Remove all form field styling for input fields
+  .mat-form-field,
+  .mat-form-field-wrapper,
+  .mat-form-field-flex,
+  .mat-form-field-infix,
+  .mat-form-field-outline,
+  .mat-form-field-outline-start,
+  .mat-form-field-outline-gap,
+  .mat-form-field-outline-end,
+  .mat-form-field-underline,
+  .mat-form-field-ripple {
     background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
     outline: none !important;
   }
   
-  // Preserve teal background for "No pending Transfers Out" text
-  .bg-info,
-  .alert-info,
-  .text-info,
-  [style*="teal"],
-  [style*="background-color"] {
-    background: teal !important;
-    color: white !important;
-    padding: 8px 12px !important;
-    display: inline-block !important;
+  // Remove Material Design input styling
+  .mat-input-element,
+  .mat-select,
+  .mat-select-trigger,
+  .mat-select-value,
+  input,
+  select,
+  textarea {
+    background: white !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
   }
   
-  // Move all content 3 spaces to the right
-  body,
-  .container,
-  .mat-card,
-  .card,
-  .content,
-  .mat-card-content,
-  .card-body,
-  div,
-  p,
-  h1, h2, h3, h4, h5, h6 {
-    margin-left: 3em !important;
-    padding-left: 0 !important;
+  // Remove dropdown arrows and icons
+  .mat-select-arrow,
+  .mat-select-arrow-wrapper,
+  .mat-form-field-suffix,
+  .mat-datepicker-toggle,
+  .mat-icon {
+    display: none !important;
+  }
+  
+  // Style labels to appear as plain text
+  .mat-form-field-label,
+  .mat-label,
+  label {
+    background: white !important;
+    color: black !important;
+    font-weight: bold !important;
+    position: static !important;
+    transform: none !important;
+    font-size: 14px !important;
+  }
+  
+  // Ensure field values appear as plain text
+  .mat-form-field-infix,
+  .mat-select-value-text,
+  .mat-input-element {
+    color: black !important;
+    font-size: 14px !important;
+    padding: 2px 0 !important;
+    margin: 0 !important;
   }
 }
